@@ -1,47 +1,32 @@
-#include <iostream>
-#include <cmath>
+#include <bits/stdc++.h>
 
 using namespace std;
 
-bool isPrime(int n)
+void solution(int64_t n)
 {
-    for (int i = 2; i <= sqrt(n); i++)
+    int64_t p = 2 * n;
+    int64_t cnt = 0;
+
+    while (n)
     {
-        if (n % i == 0)
-        {
-            return false;
-        }
+        cnt += n & 1;
+        n >>= 1;
     }
-    return true;
+
+    cout << p - cnt << endl;
 }
 
 int main()
 {
-    int n;
-    int res = 0;
+    int t;
+    cin >> t;
 
-    cin >> n;
-
-    while (n > 0)
+    while (t--)
     {
-        int cnt = 0;
-        for (int i = 2; i <= n; i++)
-        {
-            if (n % i == 0 && isPrime(i))
-            {
-                cnt++;
-            }
-        }
-
-        if (cnt == 2)
-        {
-            res++;
-        }
-
-        n--;
+        int64_t n;
+        cin >> n;
+        solution(n);
     }
-
-    cout << res << endl;
 
     return 0;
 }

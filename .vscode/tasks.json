@@ -3,14 +3,33 @@
 	"tasks": [
 		{
 			"type": "shell",
-			"label": "build",
+			"label": "build test",
 			"command": "/usr/bin/g++",
 			"args": [
 				"-std=c++17",
 				"-g",
-				"${file}",
+				"${workspaceFolder}/test.cpp",
 				"-o",
-				"${fileDirname}/${fileBasenameNoExtension}"
+				"${workspaceFolder}/build/test"
+			],
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"problemMatcher": [
+				"$gcc"
+			],
+			"group": "build"
+		},
+		{
+			"type": "shell",
+			"label": "build solution",
+			"command": "/usr/bin/g++",
+			"args": [
+				"-std=c++17",
+				"-g",
+				"${workspaceFolder}/solution.cpp",
+				"-o",
+				"${workspaceFolder}/build/solution"
 			],
 			"options": {
 				"cwd": "${workspaceFolder}"
