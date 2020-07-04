@@ -1,19 +1,21 @@
 #include <bits/stdc++.h>
 
+using ll = long long;
+
 using namespace std;
 
-void solution(int64_t n)
+void solve(ll n, ll r)
 {
-    int64_t p = 2 * n;
-    int64_t cnt = 0;
-
-    while (n)
+    ll res = 0;
+    if (n > r)
     {
-        cnt += n & 1;
-        n >>= 1;
+        res = r * (r + 1) / 2;
     }
-
-    cout << p - cnt << endl;
+    else
+    {
+        res = n * (n - 1) / 2 + 1;
+    }
+    cout << res << endl;
 }
 
 int main()
@@ -23,9 +25,9 @@ int main()
 
     while (t--)
     {
-        int64_t n;
-        cin >> n;
-        solution(n);
+        int n, r;
+        cin >> n >> r;
+        solve(n, r);
     }
 
     return 0;
