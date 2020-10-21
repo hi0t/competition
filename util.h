@@ -1,5 +1,6 @@
 #pragma once
 
+#include <chrono>
 #include <functional>
 #include <iomanip>
 #include <iostream>
@@ -7,7 +8,7 @@
 #include <string>
 #include <vector>
 
-bool __reportData(const std::string &want, const std::string &fact)
+bool __reportData(const std::string &want, const std::string &fact, int ms)
 {
     const std::string titleWant = "want", titleFact = "fact";
     std::istringstream ssWant(want), ssFact(fact);
@@ -67,6 +68,13 @@ bool __reportData(const std::string &want, const std::string &fact)
         i++;
     }
 
+    for (size_t i = 0; i < sizeWant + sizeFact; i++)
+    {
+        std::cout << '-';
+    }
+    std::cout << std::endl;
+    std::cout << std::setw(sizeWant + sizeFact) << (std::to_string(ms) + " ms") << std::endl;
+
     return res;
 }
 
@@ -78,13 +86,17 @@ bool check(const std::function<int(void)> &mainFn, const std::string &test, cons
     std::ostringstream out;
     auto coutbuf = std::cout.rdbuf(out.rdbuf());
 
+    auto start = std::chrono::high_resolution_clock::now();
     mainFn();
+    auto stop = std::chrono::high_resolution_clock::now();
+
     auto fact = out.str();
 
     std::cin.rdbuf(cinbuf);
     std::cout.rdbuf(coutbuf);
 
-    return __reportData(want, fact);
+    auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(stop - start);
+    return __reportData(want, fact, duration.count());
 }
 
 void __reportResult(const char *file, unsigned int line, bool valid)
