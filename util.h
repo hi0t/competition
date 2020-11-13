@@ -25,6 +25,7 @@ bool __reportData(const std::string &want, const std::string &fact, int ms)
         }
         if (!sFact.empty())
         {
+            sFact.erase(std::find_if(sFact.rbegin(), sFact.rend(), std::bind1st(std::not_equal_to<char>(), ' ')).base(), sFact.end());
             sizeFact = std::max(sizeFact, sFact.size());
             colFact.push_back(sFact);
         }
