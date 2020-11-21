@@ -4,8 +4,11 @@ using ll = long long;
 
 using namespace std;
 
-void solve(ll n, ll r)
+void solve()
 {
+    ll n, r;
+    cin >> n >> r;
+
     ll res = 0;
     if (n > r)
     {
@@ -25,9 +28,7 @@ int main()
 
     while (t--)
     {
-        int n, r;
-        cin >> n >> r;
-        solve(n, r);
+        solve();
     }
 
     return 0;
