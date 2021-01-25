@@ -110,4 +110,4 @@ void __reportResult(const char *file, unsigned int line, bool valid)
 #define ASSERT(expr)                                \
     (static_cast<bool>(expr)                        \
          ? __reportResult(__FILE__, __LINE__, true) \
-         : [] { __reportResult(__FILE__, __LINE__, false); asm("int3"); }())
+         : [] { __reportResult(__FILE__, __LINE__, false); }())
