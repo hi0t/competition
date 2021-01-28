@@ -10,12 +10,9 @@ void solve()
     cin >> n >> r;
 
     ll res = 0;
-    if (n > r)
-    {
+    if (n > r) {
         res = r * (r + 1) / 2;
-    }
-    else
-    {
+    } else {
         res = n * (n - 1) / 2 + 1;
     }
     cout << res << endl;
@@ -26,8 +23,7 @@ int main()
     int t;
     cin >> t;
 
-    while (t--)
-    {
+    while (t--) {
         solve();
     }
 

@@ -16,15 +16,12 @@ bool __reportData(const std::string &want, const std::string &fact, int ms)
     size_t sizeWant = 0, sizeFact = 0;
     std::string sWant, sFact;
 
-    while (std::getline(ssWant, sWant) || std::getline(ssFact, sFact))
-    {
-        if (!sWant.empty())
-        {
+    while (std::getline(ssWant, sWant) || std::getline(ssFact, sFact)) {
+        if (!sWant.empty()) {
             sizeWant = std::max(sizeWant, sWant.size());
             colWant.push_back(sWant);
         }
-        if (!sFact.empty())
-        {
+        if (!sFact.empty()) {
             sFact.erase(std::find_if(sFact.rbegin(), sFact.rend(), std::bind1st(std::not_equal_to<char>(), ' ')).base(), sFact.end());
             sizeFact = std::max(sizeFact, sFact.size());
             colFact.push_back(sFact);
@@ -34,8 +31,7 @@ bool __reportData(const std::string &want, const std::string &fact, int ms)
     sizeFact = std::max(sizeFact, titleFact.size()) + 1;
 
     std::cout << std::setw(sizeWant) << titleWant << std::setw(sizeFact) << titleFact << std::endl;
-    for (size_t i = 0; i < sizeWant + sizeFact; i++)
-    {
+    for (size_t i = 0; i < sizeWant + sizeFact; i++) {
         std::cout << '-';
     }
     std::cout << std::endl;
@@ -43,34 +39,27 @@ bool __reportData(const std::string &want, const std::string &fact, int ms)
     bool res = true;
 
     size_t i = 0;
-    while (i < colWant.size() || i < colFact.size())
-    {
+    while (i < colWant.size() || i < colFact.size()) {
         std::string lastWant;
-        if (i < colWant.size())
-        {
+        if (i < colWant.size()) {
             lastWant = colWant[i];
             std::cout << std::setw(sizeWant) << colWant[i];
         }
-        if (i < colFact.size())
-        {
-            if (colFact[i] != lastWant)
-            {
+        if (i < colFact.size()) {
+            if (colFact[i] != lastWant) {
                 res = false;
             }
             std::cout << (colFact[i] == lastWant ? "\033[32m" : "\033[31m")
                       << std::setw(sizeFact) << colFact[i]
                       << "\033[0m";
-        }
-        else
-        {
+        } else {
             res = false;
         }
         std::cout << std::endl;
         i++;
     }
 
-    for (size_t i = 0; i < sizeWant + sizeFact; i++)
-    {
+    for (size_t i = 0; i < sizeWant + sizeFact; i++) {
         std::cout << '-';
     }
     std::cout << std::endl;
@@ -107,7 +96,7 @@ void __reportResult(const char *file, unsigned int line, bool valid)
               << std::endl;
 }
 
-#define ASSERT(expr)                                \
-    (static_cast<bool>(expr)                        \
-         ? __reportResult(__FILE__, __LINE__, true) \
-         : [] { __reportResult(__FILE__, __LINE__, false); }())
+#define ASSERT(expr)                                   \
+    (static_cast<bool>(expr)                           \
+            ? __reportResult(__FILE__, __LINE__, true) \
+            : [] { __reportResult(__FILE__, __LINE__, false); }())
