@@ -8,7 +8,7 @@
 #include <string>
 #include <vector>
 
-bool __reportData(const std::string &want, const std::string &fact, int ms)
+void __reportData(const std::string &want, const std::string &fact, int ms)
 {
     const std::string titleWant = "want", titleFact = "fact";
     std::istringstream ssWant(want), ssFact(fact);
@@ -63,12 +63,12 @@ bool __reportData(const std::string &want, const std::string &fact, int ms)
         std::cout << '-';
     }
     std::cout << std::endl;
-    std::cout << std::setw(sizeWant + sizeFact) << (std::to_string(ms) + " ms") << std::endl;
+    std::cout << (std::to_string(ms) + " ms") << std::endl;
 
-    return res;
+    std::cout << (res ? "\033[32mPASSED\033[0m" : "\033[31mFAILED\033[0m") << std::endl;
 }
 
-bool check(const std::function<int(void)> &mainFn, const std::string &test, const std::string &want)
+void check(const std::function<int(void)> &mainFn, const std::string &test, const std::string &want)
 {
     std::istringstream in(test);
     auto cinbuf = std::cin.rdbuf(in.rdbuf());
@@ -86,17 +86,5 @@ bool check(const std::function<int(void)> &mainFn, const std::string &test, cons
     std::cout.rdbuf(coutbuf);
 
     auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(stop - start);
-    return __reportData(want, fact, duration.count());
+    __reportData(want, fact, duration.count());
 }
-
-void __reportResult(const char *file, unsigned int line, bool valid)
-{
-    std::cout << file << ":" << line << "\t"
-              << (valid ? "\033[32mPASSED\033[0m" : "\033[31mFAILED\033[0m")
-              << std::endl;
-}
-
-#define ASSERT(expr)                                   \
-    (static_cast<bool>(expr)                           \
-            ? __reportResult(__FILE__, __LINE__, true) \
-            : [] { __reportResult(__FILE__, __LINE__, false); }())

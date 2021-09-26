@@ -22,7 +22,9 @@ const string want = R"(
 
 int main()
 {
-    ASSERT(check(mainFn, test, want));
+    ios_base::sync_with_stdio(false);
+    cin.tie(nullptr);
+    check(mainFn, test, want);
 
     return 0;
 }
