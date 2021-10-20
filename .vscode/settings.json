@@ -1,3 +1,4 @@
 {
     "C_Cpp.clang_format_style": "{ BasedOnStyle: WebKit, PointerAlignment: Right}",
+    "C_Cpp.default.cppStandard": "c++17"
 }
