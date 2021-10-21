@@ -8,7 +8,7 @@
 #include <string>
 #include <vector>
 
-void __reportData(const std::string &want, const std::string &fact, int ms)
+void __reportData(const std::string &want, const std::string &fact, long int ms)
 {
     const std::string titleWant = "want", titleFact = "fact";
     std::istringstream ssWant(want), ssFact(fact);
@@ -30,7 +30,7 @@ void __reportData(const std::string &want, const std::string &fact, int ms)
     sizeWant = std::max(sizeWant, titleWant.size()) + 1;
     sizeFact = std::max(sizeFact, titleFact.size()) + 1;
 
-    std::cout << std::setw(sizeWant) << titleWant << std::setw(sizeFact) << titleFact << std::endl;
+    std::cout << std::setw((int)sizeWant) << titleWant << std::setw((int)sizeFact) << titleFact << std::endl;
     for (size_t i = 0; i < sizeWant + sizeFact; i++) {
         std::cout << '-';
     }
@@ -43,14 +43,14 @@ void __reportData(const std::string &want, const std::string &fact, int ms)
         std::string lastWant;
         if (i < colWant.size()) {
             lastWant = colWant[i];
-            std::cout << std::setw(sizeWant) << colWant[i];
+            std::cout << std::setw((int)sizeWant) << colWant[i];
         }
         if (i < colFact.size()) {
             if (colFact[i] != lastWant) {
                 res = false;
             }
             std::cout << (colFact[i] == lastWant ? "\033[32m" : "\033[31m")
-                      << std::setw(sizeFact) << colFact[i]
+                      << std::setw((int)sizeFact) << colFact[i]
                       << "\033[0m";
         } else {
             res = false;
