@@ -25,7 +25,8 @@ int main()
     int t = 1;
     cin >> t;
 
-    while (t--) {
+    for (int i = 1; i <= t; i++) {
+        //cout << "Case #" << i << ": ";
         solve();
     }
 
